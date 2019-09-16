@@ -5,10 +5,9 @@ class Config:
     Base Configuration
     """
     LOG_FILE = "app.log"  # where logs are outputted to
-    BASIC_AUTH_FORCE = True
-    SECRET_KEY = os.environ.get("SECRET_KEY")
-    AUTH_USERNAME = os.environ.get("TAUH_USERNAME")
-    AUTH_PASSWORD = os.environ.get("AUTH_PASSWORD")
+    SECRET_KEY = os.getenv("SECRET_KEY")
+    AUTH_USERNAME = os.getenv("AUTH_USERNAME")
+    AUTH_PASSWORD = os.getenv("AUTH_PASSWORD")
 
 
 class DevelopmentConfig(Config):

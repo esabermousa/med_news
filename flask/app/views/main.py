@@ -1,7 +1,8 @@
-from app.core import create_response, logger
-from flask import Blueprint, request
+from app.util import create_response
+from flask import Blueprint, request, g
+from flask import current_app as app
 
-# from app.auth import verify_user
+from app.auth import auth, generate_auth_token
 
 
 main = Blueprint("main", __name__)
@@ -10,34 +11,46 @@ main = Blueprint("main", __name__)
 @main.route("/health-check", methods=["GET"])
 def index():
     msg = "Health-check success."
-    logger.info(msg)
+    app.logger.info(msg)
     return create_response(message=msg, data={})
 
 
 @main.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
-    logger.info("Data recieved: %s", data)
+    app.logger.info("Data recieved: %s", data)
 
     if "auth" not in data:
         msg = "No auth provided."
-        logger.info(msg)
-        return create_response(status=400, message=msg)
+        app.logger.info(msg)
+        return create_response(status=400, message=msg, data={})
     
     if ":" not in data['auth']:
         msg = "Username or Password is missing."
-        logger.info(msg)
+        app.logger.info(msg)
         return create_response(status=400, message=msg, data={})    
 
-    username = data['auth'].split(':')[0]
-    password = data['auth'].split(':')[-1]
-    # token = verify_user(data['username'], data['password'])
-    token = 'asddfffgfgfhfjhhjgjkgujnvbnbn'
-    if token:
+    username = str(data['auth'].split(':')[0])
+    password = str(data['auth'].split(':')[-1])
+
+    if username == app.config.get('AUTH_USERNAME') and password == app.config.get('AUTH_PASSWORD'):
+        token = generate_auth_token(username, password)
         result = {
             "auth_token": token,
             "expiration": 60
         }
         msg = "Successfully loged in."
-        logger.info(msg)
+        app.logger.info(msg)
         return create_response(message=msg, data=result)
+
+    msg = "Username or Password is wrong."
+    app.logger.info(msg)
+    return create_response(status=401, message=msg, data={})
+
+
+
+@main.route("/test")
+@auth.login_required
+def test():
+    print(g.user)
+    return 'ok', 200

@@ -1,7 +1,6 @@
 from flask_script import Manager
 from app import create_app
 
-from app.core import  logger
 
 # sets up the app
 app = create_app()

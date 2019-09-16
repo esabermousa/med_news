@@ -1,15 +1,7 @@
-import configparser
-import logging
-import os
 from typing import Tuple, List
-
-from werkzeug.local import LocalProxy
-from flask import current_app, jsonify
+from flask import jsonify, g
 from flask.wrappers import Response
 
-# logger object for all views to use
-logger = LocalProxy(lambda: current_app.logger)
-core_logger = logging.getLogger("core")
 
 def create_response(
     data: dict = None, status: int = 200, message: str = ""
@@ -39,4 +31,3 @@ def all_exception_handler(error: Exception) -> Tuple[Response, int]:
     :returns Tuple of a Flask Response and int
     """
     return create_response(message=str(error), status=500)
-
