@@ -13,8 +13,10 @@ class Reddit():
 
     def list_news(self):
         top_news = self.reddit.subreddit('news').new()
+        app.logger.info("List top news from reddit.")
         return top_news
 
     def search_news(self, query):
         result_news = self.reddit.subreddit('news').search(str(query))
+        app.logger.info("Search for {}  from reddit news.".format(str(query)))
         return result_news

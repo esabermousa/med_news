@@ -7,7 +7,7 @@ from flask import g
 auth = HTTPTokenAuth('Bearer')
 
 
-def generate_auth_token(username, password, expiration= 3600):
+def generate_auth_token(username, expiration= 3600):
     s = Serializer(app.config.get('SECRET_KEY'), expires_in=expiration)
     return s.dumps({'username': username}).decode('utf-8')
 

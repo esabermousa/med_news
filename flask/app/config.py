@@ -11,35 +11,46 @@ class Config:
 
     # Reddit Creadintials
     REDDIT_CLIENT_ID = os.getenv("REDDIT_CLIENT_ID")  # 2oRB4_NENWeSog
-    REDDIT_CLIENT_SECRET = os.getenv(
-        "REDDIT_CLIENT_SECRET")  # mmyBpGP-Vxi6TVcvtJtAXSob1GM
+    REDDIT_CLIENT_SECRET = os.getenv("REDDIT_CLIENT_SECRET")  # mmyBpGP-Vxi6TVcvtJtAXSob1GM
     REDDIT_PASSWORD = os.getenv("REDDIT_PASSWORD")
     REDDIT_USERAGENT = os.getenv("REDDIT_USERAGENT") 
     REDDIT_USERNAME = os.getenv("REDDIT_USERNAME")
 
     # Reddit Fields
-    TEDDIT = [
-        'header_title',
+    REDDIT = [
         'title',
         'url'
+    ]
+    
+    #NEWSAPI
+    NEWSAPI_KEY = os.getenv("NEWSAPI_KEY")
+    NEWSAPI = [
+        'title',
+        'url',
+        # 'author',
+        # 'description',
+        # 'urlToImage',
+        # 'publishedAt'
     ]
  
 class DevelopmentConfig(Config):
     DEBUG = True
 
 
-class DockerConfig(Config):
+class TestingConfig(Config):
     DEBUG = True
+    TESTING = True
 
 
 class ProductionConfig(Config):
     DEBUG = False
+    TESTING = False
 
 
 
 # way to map the value of `FLASK_ENV` to a configuration
 config = {
     "development": DevelopmentConfig,
-    "docker": DockerConfig,
+    "test": TestingConfig,
     "production": ProductionConfig
     }

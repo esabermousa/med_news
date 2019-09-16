@@ -8,9 +8,9 @@ from app.config import config
 from app.util import all_exception_handler
 
     
-def create_app():
+def create_app(config_class="development"):
     app = Flask(__name__)
-    env = os.environ.get("FLASK_ENV", "development")
+    env = os.environ.get("FLASK_ENV", config_class)
     app.config.from_object(config[env])
     
     # load dotenv in the base root

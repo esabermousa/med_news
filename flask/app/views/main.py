@@ -34,7 +34,7 @@ def login():
     password = str(data['auth'].split(':')[-1])
 
     if username == app.config.get('AUTH_USERNAME') and password == app.config.get('AUTH_PASSWORD'):
-        token = generate_auth_token(username, password)
+        token = generate_auth_token(username)
         result = {
             "auth_token": token,
             "expiration": 60

@@ -10,7 +10,7 @@ def create_response(
     if type(data) is not dict and data is not None:
         raise TypeError("Data should be a dictionary")
     
-    data["message"] = message
+    data["return_message"] = message
     response = {"success": 200 <= status < 300, "result": data}
     return jsonify(response), status
 
@@ -21,8 +21,11 @@ def serialize_list(items: List, source: str, fields: List) -> List:
 
     new_list = list()
     for item in items:
-        newdict = {k: item.k for k in fields}
+        if type(item) is not type({}):
+            item = item.__dict__
+        newdict = {k: item[k] for k in fields if k in item.keys()}
         newdict['source'] = source
+        newdict['headline'] = newdict.pop('title')
         new_list.append(newdict)
 
     return new_list
