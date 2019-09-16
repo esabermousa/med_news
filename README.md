@@ -1,14 +1,9 @@
-# Tricago Full stack task
+# 
 
 ## Solution & Desgin
 
 ### Solution
-> i assume that all tasks related with each other, so i'll use postgres as DB to
-store all feeds details to allow me to retrive & update them whenever i need.
-also there are 2 scheduale tasks.
-first one "import new feeds" and this run every day to get new feeds and store it.
-second one "update top five feeds" which calculate rate of articles and give them degree per rate
-and it will running every 5 mins as required.
+> 
 
 ### Technologies
 - PostgresDB 10
