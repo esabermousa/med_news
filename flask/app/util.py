@@ -4,7 +4,7 @@ from flask.wrappers import Response
 
 
 def create_response(
-    data: dict = None, status: int = 200, message: str = ""
+    data: dict = {}, status: int = 200, message: str = ""
 ) -> Tuple[Response, int]:
 
     if type(data) is not dict and data is not None:
@@ -15,19 +15,17 @@ def create_response(
     return jsonify(response), status
 
 
-def serialize_list(items: List) -> List:
-    """Serializes a list of SQLAlchemy Objects, exposing their attributes.
-    
-    :param items - List of Objects that inherit from Mixin
-    :returns List of dictionaries
-    """
+def serialize_list(items: List, source: str, fields: List) -> List:
     if not items or items is None:
         return []
-    return [x.to_dict() for x in items]
+
+    new_list = list()
+    for item in items:
+        newdict = {k: item.k for k in fields}
+        newdict['source'] = source
+        new_list.append(newdict)
+
+    return new_list
 
 def all_exception_handler(error: Exception) -> Tuple[Response, int]:
-    """Catches and handles all exceptions, add more specific error Handlers.
-    :param Exception
-    :returns Tuple of a Flask Response and int
-    """
     return create_response(message=str(error), status=500)

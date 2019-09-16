@@ -9,7 +9,21 @@ class Config:
     AUTH_USERNAME = os.getenv("AUTH_USERNAME")
     AUTH_PASSWORD = os.getenv("AUTH_PASSWORD")
 
+    # Reddit Creadintials
+    REDDIT_CLIENT_ID = os.getenv("REDDIT_CLIENT_ID")  # 2oRB4_NENWeSog
+    REDDIT_CLIENT_SECRET = os.getenv(
+        "REDDIT_CLIENT_SECRET")  # mmyBpGP-Vxi6TVcvtJtAXSob1GM
+    REDDIT_PASSWORD = os.getenv("REDDIT_PASSWORD")
+    REDDIT_USERAGENT = os.getenv("REDDIT_USERAGENT") 
+    REDDIT_USERNAME = os.getenv("REDDIT_USERNAME")
 
+    # Reddit Fields
+    TEDDIT = [
+        'header_title',
+        'title',
+        'url'
+    ]
+ 
 class DevelopmentConfig(Config):
     DEBUG = True
 

@@ -23,10 +23,10 @@ def create_app():
 
     # import and register blueprints
     from app.views import main
-    # from app.views import feeds
+    from app.views import news
 
     app.register_blueprint(main.main)
-    # app.register_blueprint(feeds.feeds, url_prefix='/feeds')
+    app.register_blueprint(news.news, url_prefix='/news')
 
     # register error Handler
     app.register_error_handler(Exception, all_exception_handler)

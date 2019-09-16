@@ -46,11 +46,3 @@ def login():
     msg = "Username or Password is wrong."
     app.logger.info(msg)
     return create_response(status=401, message=msg, data={})
-
-
-
-@main.route("/test")
-@auth.login_required
-def test():
-    print(g.user)
-    return 'ok', 200
