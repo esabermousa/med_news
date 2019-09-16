@@ -1,0 +1,12 @@
+*.pyc
+.vscode/
+env/
+__pycache__
+.DS_Store/
+migrations/
+postgres-data/
+.mypy_cache
+.pytest_cache
+app.log
+app.ini
+.env
