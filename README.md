@@ -166,6 +166,14 @@ headline | String | Title of news
 link | String | Link for news
 source | String | source for news
 
+#### Sample Request
+```
+GET /news   HTTP/1.1
+Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ
+Accept: application/json
+
+```
+
 #### Sample Response
 ```
 {
@@ -211,6 +219,14 @@ success | Boolean | Validity of request
 headline | String | Title of news
 link | String | Link for news
 source | String | source for news
+
+#### Sample Request
+```
+GET /news?query=bitcoin   HTTP/1.1
+Authorization: Bearer QWxhZGRpbjpvcGVuIHNlc2FtZQ
+Accept: application/json
+
+```
 
 #### Sample Response
 ```
